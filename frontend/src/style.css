@@ -6,3 +6,15 @@
   background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)) ,url('https://wallpapercave.com/wp/wp8158881.jpg');
   background-size: cover;
 }
+
+.flex1 {
+  flex: 1.5;
+}
+
+.flex3 {
+  flex: 3;
+}
+
+.flex6 {
+  flex: 6;
+}

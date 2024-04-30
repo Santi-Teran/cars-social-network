@@ -2,8 +2,8 @@ import React from 'react'
 
 const Rightbar = () => {
   return (
-    <div>
-      
+    <div className='flex3'>
+      <div>sad</div>
     </div>
   )
 }

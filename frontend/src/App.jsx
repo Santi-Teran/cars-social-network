@@ -18,7 +18,9 @@ const App = () => {
         <Navbar />
         <div className='flex'>
           <Leftbar />
-          <Outlet />
+          <div className='flex6'>
+            <Outlet />
+          </div>
           <Rightbar />
         </div>
       </div>

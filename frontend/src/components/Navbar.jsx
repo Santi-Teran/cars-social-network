@@ -6,7 +6,7 @@ import { AiOutlineAppstore, AiOutlineBell  } from "react-icons/ai";
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between px-5 py-2 h-12 border-b'>
+    <div className='flex justify-between px-5 py-2 h-12 border-b sticky top-0'>
       <div className='flex items-center gap-x-8'>
         <Link to='/'>
           <span className='font-bold text-xl text-indigo-900'>cars social</span>
@@ -23,8 +23,8 @@ const Navbar = () => {
         <IoPersonOutline />
         <IoMailOutline />
         <AiOutlineBell />
-        <div className='flex items-center gap-x-2 font-semibold'>
-          <img src='https://wallpapercave.com/wp/wp13386432.png' alt='Profile' className='w-8 h-8 rounded-full object-cover' />
+        <div className='flex items-center gap-x-2 font-semibold ml-4'>
+          <IoPersonOutline />
           <span>John Doe</span>
         </div>
       </div>
