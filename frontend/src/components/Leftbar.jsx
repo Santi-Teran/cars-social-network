@@ -7,7 +7,7 @@ import { IoPersonOutline } from "react-icons/io5";
 
 const Leftbar = () => {
   return (
-    <div className='flex1'>
+    <div className='flex1 position sticky top-12 height overflow-scroll'>
       <div className='p-5'>
         <ul className='flex flex-col gap-3'>
           <li className='flex items-center gap-x-2 text-lg'><IoPersonOutline />John Doe</li>

@@ -2,8 +2,18 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>
-      asd
+    <div className='bg-gray-100'>
+      <h1 className='text-9xl'>Home</h1>
+      <h1 className='text-9xl'>Home</h1>
+
+      <h1 className='text-9xl'>Home</h1>
+
+      <h1 className='text-9xl'>Home</h1>
+      <h1 className='text-9xl'>Home</h1>
+      <h1 className='text-9xl'>Home</h1>
+      <h1 className='text-9xl'>Home</h1>
+      <h1 className='text-9xl'>Home</h1>
+
     </div>
   )
 }
