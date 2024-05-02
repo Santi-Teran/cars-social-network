@@ -6,7 +6,7 @@ import { AiOutlineAppstore, AiOutlineBell  } from "react-icons/ai";
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between px-5 py-2 h-12 border-b sticky top-0 bg-white'>
+    <div className='flex justify-between px-5 py-2 h-12 border-b sticky top-0 bg-white z-10'>
       <div className='flex items-center gap-x-8'>
         <Link to='/'>
           <span className='font-bold text-xl text-indigo-900'>cars social</span>
