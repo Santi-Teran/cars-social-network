@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { IoHomeOutline, IoMoonOutline, IoSearch, IoPersonOutline, IoMailOutline } from "react-icons/io5";
 import { AiOutlineAppstore, AiOutlineBell  } from "react-icons/ai";
+import { AuthContext } from '../context/authContext';
 
 
 const Navbar = () => {
+
+  const {currentUser} = useContext(AuthContext);
+
   return (
     <div className='flex justify-between px-5 py-2 h-12 border-b sticky top-0 bg-white z-10'>
       <div className='flex items-center gap-x-8'>
@@ -24,8 +28,8 @@ const Navbar = () => {
         <IoMailOutline />
         <AiOutlineBell />
         <div className='flex items-center gap-x-2 font-semibold ml-4'>
-          <IoPersonOutline />
-          <span>John Doe</span>
+          <img src={currentUser.image} className='w-8 h-8 rounded-full object-cover'/>
+          <span>{currentUser.name}</span>
         </div>
       </div>
     </div>

@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IoEllipsisHorizontal } from "react-icons/io5";
+import { IoEllipsisHorizontal, IoShareSocialOutline } from "react-icons/io5";
+import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { BiCommentDetail } from "react-icons/bi";
+import Comments from './Comments';
+
 
 const Post = ({post}) => {
+
+  const [commentOpen, setCommentOpen] = useState(false);
+
+  const liked = false;
+
   return (
     <div className='rounded-2xl bg-white'>
       <div className='p-5'>
@@ -22,11 +31,18 @@ const Post = ({post}) => {
           <p>{post.desc}</p>
           <img src={post.img} alt='' className='w-full max-h-[500px] object-cover mt-5'/>
         </div>
-        <div>
-          <div></div>
-          <div></div>
-          <div></div>
+        <div className='flex items-center gap-5'>
+          <div className='flex items-center gap-2 cursor-pointer'>
+            { liked ? <FaHeart className='text-red-500' /> : <FaRegHeart /> } 12 Likes
+          </div>
+          <div className='flex items-center gap-2 cursor-pointer' onClick={() => setCommentOpen(!commentOpen)}>
+            <BiCommentDetail />12 Comments
+          </div>
+          <div className='flex items-center gap-2 cursor-pointer'>
+            <IoShareSocialOutline />Share
+          </div>
         </div>
+        { commentOpen && <Comments />}
       </div>
     </div>
   )
