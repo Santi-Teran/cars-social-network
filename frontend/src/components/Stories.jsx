@@ -31,16 +31,16 @@ const Stories = () => {
   ];
 
   return (
-    <div className='flex gap-2 mb-8 h-60'>
-      {/* <div className='flex-1 rounded-xl overflow-hidden'>
-        <img src={currentUser.image} alt='' className='w-full h-full'/>
-        <span>{currentUser.name}</span>
+    <div className='flex gap-2 mb-8 sm:h-60 h-12 justify-between sm:justify-normal'>
+      <div className='sm:flex2 sm:rounded-lg overflow-hidden relative flex-none rounded-full'>
+        <img src={currentUser.image} alt='' className='sm:w-full sm:h-full w-12 h-12 object-cover'/>
+        <span className='absolute bottom-2 left-2 text-white font-medium hidden sm:flex'>{currentUser.name}</span>
         <button className='absolute bottom-10 left-2 text-white font-medium'>+</button>
-      </div> */}
+      </div>
       {stories.map(story => (
-        <div key={story.id} className='flex2 rounded-xl overflow-hidden relative'>
-          <img src={story.img} className='w-full h-full object-cover'/>
-          <span className='absolute bottom-2 left-2 text-white font-medium'>{story.name}</span>
+        <div key={story.id} className='sm:flex2 sm:rounded-lg overflow-hidden relative flex-none rounded-full'>
+          <img src={story.img} className='sm:w-full sm:h-full w-12 h-12 object-cover'/>
+          <span className='absolute bottom-2 left-2 text-white font-medium hidden sm:flex'>{story.name}</span>
         </div>
       ))}
     </div>

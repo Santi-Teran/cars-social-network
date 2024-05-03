@@ -4,7 +4,7 @@ import { IoPersonOutline } from "react-icons/io5";
 
 const Rightbar = () => {
   return (
-    <div className='flex3 position sticky top-12 height overflow-scroll bg-gray-100'>
+    <div className='flex3 position sticky top-12 height overflow-scroll bg-gray-100 hidden sm:flex flex-col'>
       <div className='p-5'>
         <div className='p-5 shadow-lg bg-white'>
           <span>Suggestions For You</span>

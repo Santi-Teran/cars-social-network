@@ -20,10 +20,10 @@ const Navbar = () => {
         <AiOutlineAppstore />
         <div className='flex items-center gap-x-2 border rounded p-1'>
           <IoSearch />
-          <input type='text' placeholder='Search...' className='outline-none w-[500px]' />
+          <input type='text' placeholder='Search...' className='outline-none w-[500px] hidden sm:flex' />
         </div>
       </div>
-      <div className='flex items-center gap-x-8'>
+      <div className='items-center gap-x-8 hidden sm:flex'>
         <IoPersonOutline />
         <IoMailOutline />
         <AiOutlineBell />
