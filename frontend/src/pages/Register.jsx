@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
+
+  const [inputs, setInputs] = useState({
+    username: '',
+    email: '',
+    password: '',
+    name: '',
+  });
+  const [error, setError] = useState(null);
+
+  const handleChange = e => {
+    setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  };
+
+  const handleClick = async e => {
+    e.preventDefault()
+
+    try {
+      await axios.post('http://localhost:5000/api/auth/register', inputs)
+    } catch (error) {
+      setError(error.response.data)
+    }
+  }
+
   return (
     <div className='flex items-center h-screen bg-slate-300 justify-center '>
       <div className='flex bg-white w-1/2 rounded-xl min-h-[600px] overflow-hidden'>
       <div className='flex flex-col flex-1 gap-y-10 p-12 justify-center'>
           <h1 className='text-5xl'>Register</h1>
           <form className='flex flex-col gap-y-8'>
-            <input className=' border-b px-5 py-2' type='text' placeholder='Username'/>
-            <input className=' border-b px-5 py-2' type='email' placeholder='Email'/>
-            <input className=' border-b px-5 py-2' type='password' placeholder='Password'/>
-            <input className=' border-b px-5 py-2' type='text' placeholder='Name'/>
+            <input className=' border-b px-5 py-2' type='text' placeholder='Username' name='username' onChange={handleChange} />
+            <input className=' border-b px-5 py-2' type='email' placeholder='Email' name='email' onChange={handleChange} />
+            <input className=' border-b px-5 py-2' type='password' placeholder='Password' name='password' onChange={handleChange} />
+            <input className=' border-b px-5 py-2' type='text' placeholder='Name' name='name' onChange={handleChange} />
+            {error && error}
             <Link to='/register'>
-              <button className='w-1/2 p-3 bg-purple-500 text-white font-bold'>Register</button>
+              <button className='w-1/2 p-3 bg-purple-500 text-white font-bold' onClick={handleClick}>Register</button>
             </Link>
           </form>
         </div>
