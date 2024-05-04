@@ -28,8 +28,8 @@ const Post = ({post}) => {
           <IoEllipsisHorizontal />
         </div>
         <div className='my-5 mx-0'>
-          <p>{post.desc}</p>
-          <img src={post.img} alt='' className='w-full max-h-[500px] object-cover mt-5'/>
+          <p>{post.description}</p>
+          <img src={post.image} alt='' className='w-full max-h-[500px] object-cover mt-5'/>
         </div>
         <div className='flex items-center gap-5'>
           <div className='flex items-center gap-2 cursor-pointer'>

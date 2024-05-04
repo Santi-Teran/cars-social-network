@@ -17,6 +17,7 @@
     "vite": "^5.2.10"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.32.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
     "postcss": "^8.4.38",

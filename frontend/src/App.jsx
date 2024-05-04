@@ -8,23 +8,27 @@ import Rightbar from './components/Rightbar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import { AuthContext } from './context/authContext';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const App = () => {
 
   const {currentUser} = useContext(AuthContext);
 
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
-      <div>
-        <Navbar />
-        <div className='flex'>
-          <Leftbar />
-          <div className='flex6'>
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div>
+          <Navbar />
+          <div className='flex'>
+            <Leftbar />
+            <div className='flex6'>
+              <Outlet />
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
         </div>
-      </div>
+      </QueryClientProvider>
     );
   };
 
