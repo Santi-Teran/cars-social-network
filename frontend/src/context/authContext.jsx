@@ -8,12 +8,15 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  const login = async(inputs) => {
-    const res = await axios.post('http://localhost:5000/api/auth/login', inputs, {
-      withCredentials: true,
-    });
-
-    setCurrentUser(res.data)
+  const login = async (inputs) => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', inputs, {
+        withCredentials: true,
+      });
+      setCurrentUser(res.data);
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
   };
 
   useEffect(() => {

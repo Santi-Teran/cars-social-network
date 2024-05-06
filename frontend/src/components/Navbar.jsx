@@ -19,7 +19,7 @@ const Navbar = () => {
     try {
       await axios.post('http://localhost:5000/api/auth/logout');
       // Eliminar información de usuario del localStorage
-      // localStorage.removeItem("user");
+      localStorage.removeItem("user");
       // Redirigir a la página de inicio de sesión
       navigate('/login')
     } catch (error) {
