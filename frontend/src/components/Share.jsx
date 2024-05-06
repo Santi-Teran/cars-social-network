@@ -5,12 +5,23 @@ import { makeRequest } from '../axios';
 
 const Share = () => {
 
+  const {currentUser} = useContext(AuthContext);
+
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState('');
 
-  const {currentUser} = useContext(AuthContext);
-
   const queryClient = useQueryClient();
+
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file)
+      const res = await makeRequest.post('/upload', formData);
+      return res.data
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const mutation = useMutation({
     mutationFn: (newPost) => {
@@ -21,10 +32,15 @@ const Share = () => {
     }
   });
 
-  const handleClick = e => {
+
+  const handleClick = async (e) => {
     e.preventDefault();
 
-    mutation.mutate({description})
+    let img = '';
+    if(file) img = await upload();
+    mutation.mutate({ description, image: img })
+    setDescription('')
+    setFile(null)
   };
 
   return (
@@ -36,7 +52,9 @@ const Share = () => {
             <input type='text' placeholder={`Whats on your mind ${currentUser.name}?`} className='w-full' onChange={(e) => setDescription(e.target.value)} value={description}/>
           </div>
           <div className='flex2 flex justify-end'>
-
+            {file && (
+              <img className="file" alt="" src={URL.createObjectURL(file)} />
+            )}
           </div>
         </div>
         <hr className='my-5'/>

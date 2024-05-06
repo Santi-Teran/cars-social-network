@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment'
 import { Link } from 'react-router-dom';
 import { IoEllipsisHorizontal, IoShareSocialOutline } from "react-icons/io5";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
@@ -22,14 +23,14 @@ const Post = ({post}) => {
               <Link to={`/profile/${post.userId}`}>
                 <span className='font-medium'>{post.name}</span>
               </Link>
-              <span className='text-sm'>1 min ago</span>
+              <span className='text-sm'>{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
           <IoEllipsisHorizontal />
         </div>
         <div className='my-5 mx-0'>
           <p>{post.description}</p>
-          <img src={post.image} alt='' className='w-full max-h-[500px] object-cover mt-5'/>
+          <img src={'./upload/' + post.image} alt='' className='w-full max-h-[500px] object-cover mt-5'/>
         </div>
         <div className='flex items-center gap-5'>
           <div className='flex items-center gap-2 cursor-pointer'>
