@@ -12,11 +12,10 @@ const Posts = () => {
     })
   });
 
-  console.log(data);
-
   if (isLoading) return 'Loading...'
 
   if (error) return 'An error has occurred: ' + error.message
+
 
   return <div className="flex flex-col gap-12">
     {
