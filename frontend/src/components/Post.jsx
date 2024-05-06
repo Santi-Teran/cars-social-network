@@ -43,7 +43,7 @@ const Post = ({post}) => {
             <IoShareSocialOutline />Share
           </div>
         </div>
-        { commentOpen && <Comments />}
+        { commentOpen && <Comments id_post={post.id} />}
       </div>
     </div>
   )
