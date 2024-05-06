@@ -1,17 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import moment from 'moment'
 import { Link } from 'react-router-dom';
 import { IoEllipsisHorizontal, IoShareSocialOutline } from "react-icons/io5";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { BiCommentDetail } from "react-icons/bi";
 import Comments from './Comments';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { makeRequest } from '../axios';
+import { AuthContext } from '../context/authContext';
 
 
 const Post = ({post}) => {
 
   const [commentOpen, setCommentOpen] = useState(false);
 
-  const liked = false;
+  const {currentUser} = useContext(AuthContext);
+
+  const { isLoading, error, data } = useQuery({
+    
+    queryKey: ['likes', post.id],
+    queryFn: () => makeRequest.get('/likes?id_post=' + post.id).then((res) => {
+      return res.data
+    })
+  });
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (liked) => {
+      if(liked) return makeRequest.delete('/likes?id_post=' + post.id);
+      return makeRequest.post('/likes', { id_post: post.id })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['likes'])
+    }
+  });
+
+  const handleLike = () => {
+    mutation.mutate(data.includes(currentUser.id))
+  }
 
   return (
     <div className='rounded-2xl bg-white'>
@@ -34,8 +61,19 @@ const Post = ({post}) => {
         </div>
         <div className='flex items-center gap-5'>
           <div className='flex items-center gap-2 cursor-pointer'>
-            { liked ? <FaHeart className='text-red-500' /> : <FaRegHeart /> } 12 Likes
+          {isLoading ? (
+              "loading"
+            ) : data.includes(currentUser.id) ? (
+              <FaHeart
+                style={{ color: "red" }}
+                onClick={handleLike}
+              />
+            ) : (
+              <FaRegHeart onClick={handleLike} />
+            )}
+            {data?.length} Likes
           </div>
+
           <div className='flex items-center gap-2 cursor-pointer' onClick={() => setCommentOpen(!commentOpen)}>
             <BiCommentDetail />12 Comments
           </div>
