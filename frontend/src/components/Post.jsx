@@ -17,7 +17,6 @@ const Post = ({post}) => {
   const {currentUser} = useContext(AuthContext);
 
   const { isLoading, error, data } = useQuery({
-    
     queryKey: ['likes', post.id],
     queryFn: () => makeRequest.get('/likes?id_post=' + post.id).then((res) => {
       return res.data
@@ -47,7 +46,7 @@ const Post = ({post}) => {
           <div className='flex gap-5'>
             <img src={post.profilePic} alt='' className='w-10 h-10 rounded-full object-cover'/>
             <div className='flex flex-col'>
-              <Link to={`/profile/${post.userId}`}>
+              <Link to={`/profile/${post.id_user}`}>
                 <span className='font-medium'>{post.name}</span>
               </Link>
               <span className='text-sm'>{moment(post.createdAt).fromNow()}</span>
