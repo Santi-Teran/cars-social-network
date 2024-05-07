@@ -11,17 +11,36 @@ const Profile = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const userId = parseInt(useLocation().pathname.split("/")[2]);
+  const id_user = parseInt(useLocation().pathname.split("/")[2]);
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['user'],
-    queryFn: () => makeRequest.get('/users/find/' + userId).then((res) => {
+    queryFn: () => makeRequest.get('/users/find/' + id_user).then((res) => {
       return res.data
     })
   });
 
+  const { isLoading: rIsLoading, data: relationshipData} = useQuery({
+    queryKey: ['relationship'],
+    queryFn: () => makeRequest.get('/relationships?id_followed=' + id_user).then((res) => {
+      return res.data
+    })
+  });
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (following) => {
+      if(following) return makeRequest.delete('/relationships?id_user=' + id_user);
+      return makeRequest.post('/relationships', { id_user })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['relationship'])
+    }
+  });
+
   const handleFollow = () => {
-    
+    mutation.mutate(relationshipData.includes(currentUser.id))
   }
 
   return (
@@ -52,10 +71,14 @@ const Profile = () => {
                 <span className='text-sm'>{data.city}</span>
               </div>
             </div>
-            { userId === currentUser.id ? (
+            { rIsLoading ? 'loading' : id_user === currentUser.id ? (
               <button>Update</button>
             ) : (
-              <button onClick={handleFollow}>Follow</button> )
+              <button onClick={handleFollow}>
+                    {relationshipData.includes(currentUser.id)
+                      ? "Following"
+                      : "Follow"}
+                  </button> )
             }
           </div>
           <div className='flex2 flex items-center justify-end gap-2'>
@@ -63,7 +86,7 @@ const Profile = () => {
             <MdMoreVert />
           </div>
         </div>
-        <Posts />
+        <Posts id_user={id_user}/>
       </div>
       </>
       )}

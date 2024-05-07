@@ -3,11 +3,11 @@ import Post from "./Post";
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../axios';
 
-const Posts = () => {
+const Posts = ({id_user}) => {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['posts'],
-    queryFn: () => makeRequest.get('/posts').then((res) => {
+    queryFn: () => makeRequest.get('/posts?id_user=' + id_user).then((res) => {
       return res.data
     })
   });
@@ -15,7 +15,6 @@ const Posts = () => {
   if (isLoading) return 'Loading...'
 
   if (error) return 'An error has occurred: ' + error.message
-
 
   return <div className="flex flex-col gap-12">
     {
