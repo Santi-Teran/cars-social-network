@@ -18,14 +18,16 @@ export const getPosts = (req, res) => {
       q = `SELECT p.*, u.id AS id_user, name, profilePic 
            FROM posts AS p 
            JOIN users AS u ON (u.id = p.id_user) 
-           WHERE p.id_user = ?`;
+           WHERE p.id_user = ? 
+           ORDER BY p.createdAt DESC`;
       values = [id_user];
     } else {
       q = `SELECT p.*, u.id AS id_user, name, profilePic 
            FROM posts AS p 
            LEFT JOIN users AS u ON (u.id = p.id_user) 
            LEFT JOIN relationships AS r ON (p.id_user = r.id_followed) 
-           WHERE r.id_follower = ? OR p.id_user = ?`;
+           WHERE r.id_follower = ? OR p.id_user = ? 
+           ORDER BY p.createdAt DESC`;
       values = [userInfo.id, userInfo.id];
     }
 
