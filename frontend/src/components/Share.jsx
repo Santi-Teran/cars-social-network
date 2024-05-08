@@ -47,8 +47,8 @@ const Share = () => {
     <div className='rounded-2xl mb-5 bg-white'>
       <div className='p-5'>
         <div className='flex items-center justify-between'>
-          <div className='flex items-center flex3'>
-            <img src='currentuser'/>
+          <div className='flex items-center flex3 gap-2'>
+            <img src={"/upload/" +currentUser.profilePic} className='w-8 h-8 rounded-full object-cover'/>
             <input type='text' placeholder={`Whats on your mind ${currentUser.name}?`} className='w-full' onChange={(e) => setDescription(e.target.value)} value={description}/>
           </div>
           <div className='flex2 flex justify-end'>

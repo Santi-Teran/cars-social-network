@@ -49,7 +49,7 @@ const Navbar = () => {
           <IoLogOutOutline />
         </button>
         <div className='flex items-center gap-x-2 font-semibold ml-4'>
-          <img src={currentUser.image} className='w-8 h-8 rounded-full object-cover'/>
+          <img src={"/upload/" + currentUser.profilePic} className='w-8 h-8 rounded-full object-cover'/>
           <span>{currentUser.name}</span>
         </div>
       </div>

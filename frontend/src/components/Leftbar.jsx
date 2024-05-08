@@ -14,7 +14,7 @@ const Leftbar = () => {
     <div className='flex1 position sticky top-12 height overflow-scroll hidden sm:flex'>
       <div className='p-5'>
         <ul className='flex flex-col gap-3'>
-          <li className='flex items-center gap-x-2 text-lg'><img src={currentUser.image} className='w-5 h-5 rounded-full object-cover'/>{currentUser.name}</li>
+          <li className='flex items-center gap-x-2 text-lg'><img src={"/upload/" + currentUser.profilePic} className='w-5 h-5 rounded-full object-cover'/>{currentUser.name}</li>
           <li className='flex items-center gap-x-2 text-lg'><LiaUserFriendsSolid />Friends</li>
           {/* <li className='flex items-center gap-x-2 text-lg'><HiOutlineUserGroup />Groups</li> */}
           <li className='flex items-center gap-x-2 text-lg'><CiShop />Marketplace</li>

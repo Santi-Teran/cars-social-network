@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Posts from '../components/Posts';
 import { AuthContext } from '../context/authContext';
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -6,10 +6,13 @@ import { MdMoreVert, MdOutlineEmail } from "react-icons/md";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../axios';
 import { useLocation } from 'react-router-dom';
+import Update from '../components/Update';
 
 const Profile = () => {
 
   const { currentUser } = useContext(AuthContext);
+
+  const [openUpdate, setOpenUpdate] = useState(false);
 
   const id_user = parseInt(useLocation().pathname.split("/")[2]);
 
@@ -50,11 +53,11 @@ const Profile = () => {
         <>
       <div className='w-full h-80 relative'>
         <img
-          src={data.coverPic}
+          src={'/upload/' + data.coverPic}
           alt=""
           className="w-full h-full object-cover"
         />
-        <img src={data.profilePic} className='w-48 h-48 rounded-full object-cover absolute left-0 right-0 m-auto top-44'/>
+        <img src={'/upload/' + data.profilePic} className='w-48 h-48 rounded-full object-cover absolute left-0 right-0 m-auto top-44'/>
       </div>
       <div className='py-5 px-16'>
         <div className='flex items-center justify-between mb-5 bg-white h-44 rounded-2xl p-12'>
@@ -72,7 +75,7 @@ const Profile = () => {
               </div>
             </div>
             { rIsLoading ? 'loading' : id_user === currentUser.id ? (
-              <button>Update</button>
+              <button onClick={() => setOpenUpdate(true)}>Update</button>
             ) : (
               <button onClick={handleFollow}>
                     {relationshipData.includes(currentUser.id)
@@ -90,6 +93,7 @@ const Profile = () => {
       </div>
       </>
       )}
+      { openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data}/>}
     </div>
   )
 }
